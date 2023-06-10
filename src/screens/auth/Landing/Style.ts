@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
         height:screenHeight / 2
     }, content: {
         marginTop: 'auto',
-        paddingHorizontal: 35,
+        paddingHorizontal: 40,
         paddingVertical: 30
     }, 
     title: {
@@ -26,10 +26,13 @@ export const styles = StyleSheet.create({
     button: {
         backgroundColor: 'black',
         borderRadius: 5,
-        padding: 0
+        padding: 0,
+        width: screenWidth / 1.7,
+        marginLeft: 'auto',
+        marginRight: 'auto'
     }, buttonText: {
         color: 'white',
-        paddingVertical: 10,
+        paddingVertical: 8,
         fontFamily: '400',
         fontSize: 15,
     }
