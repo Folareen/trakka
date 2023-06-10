@@ -13,10 +13,10 @@ const Tab = createBottomTabNavigator()
 
 const TabsStack = () => (
   <Tab.Navigator>
-    <Tab.Screen name='home' component={Home} />
-    <Tab.Screen name='transactions' component={Transactions} />
-    <Tab.Screen name='statistics' component={Statistics} />
-    <Tab.Screen name='profile' component={Profile} />
+    <Tab.Screen name='home' component={Home} options={{ headerShown: false }} />
+    <Tab.Screen name='transactions' component={Transactions} options={{ headerShown: false }} />
+    <Tab.Screen name='statistics' component={Statistics} options={{ headerShown: false }} />
+    <Tab.Screen name='profile' component={Profile} options={{ headerShown: false }} />
   </Tab.Navigator>
 )
 
@@ -24,7 +24,7 @@ const MainStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen component={TabsStack} name='tabs-stack' options={{ headerShown: false }} />
-      <Stack.Screen name='add-transaction' component={AddTransaction} />
+      <Stack.Screen name='add-transaction' component={AddTransaction} options={{ headerShown: false }} />
     </Stack.Navigator>
   )
 }
