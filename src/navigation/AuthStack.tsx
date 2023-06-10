@@ -10,9 +10,9 @@ const Stack = createStackNavigator()
 const AuthStack = () => {
     return (
         <Stack.Navigator>
-            <Stack.Screen component={Landing} name='landing' />
-            <Stack.Screen component={Login} name='login' />
-            <Stack.Screen component={Signup} name='signup' />
+            <Stack.Screen component={Landing} name='landing' options={{ headerShown: false }} />
+            <Stack.Screen component={Login} name='login' options={{ headerShown: false }} />
+            <Stack.Screen component={Signup} name='signup' options={{ headerShown: false }} />
         </Stack.Navigator>
     )
 }
