@@ -1,0 +1,1 @@
+export type durationType = 'today' | 'week' | 'month' | 'year'
