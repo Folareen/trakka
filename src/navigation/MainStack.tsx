@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, SafeAreaView, Platform, StatusBar } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
@@ -22,10 +22,12 @@ const TabsStack = () => (
 
 const MainStack = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen component={TabsStack} name='tabs-stack' options={{ headerShown: false }} />
-      <Stack.Screen name='add-transaction' component={AddTransaction} options={{ headerShown: false }} />
-    </Stack.Navigator>
+    <SafeAreaView style={{ paddingTop: Platform.OS == 'ios' ? 0 : StatusBar.currentHeight, flex: 1, }}>
+      <Stack.Navigator>
+        <Stack.Screen component={TabsStack} name='tabs-stack' options={{ headerShown: false }} />
+        <Stack.Screen name='add-transaction' component={AddTransaction} options={{ headerShown: false }} />
+      </Stack.Navigator>
+    </SafeAreaView>
   )
 }
 
