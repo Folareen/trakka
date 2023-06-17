@@ -14,7 +14,7 @@ const Tab = createBottomTabNavigator()
 
 const TabsStack = () => (
   <Tab.Navigator screenOptions={{
-    tabBarActiveTintColor: '#7F3DFF', tabBarInactiveTintColor: '#C6C6C6',
+    tabBarActiveTintColor: '#7F3DFF', tabBarInactiveTintColor: '#858585',
     tabBarLabelStyle: { fontSize: 10, fontFamily: '500', textTransform: 'capitalize' },
     tabBarStyle: { padding: 5, height: 60 }, tabBarItemStyle: { height: 50 }
   }}>
