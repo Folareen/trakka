@@ -31,7 +31,7 @@ const Profile = ({ navigation }: { navigation: any }) => {
 
                 {
                     ['account', 'settings', 'export data', 'logout'].map((title) => (
-                        <ProfileButton title={title} />
+                        <ProfileButton title={title} key={title} />
                     ))
                 }
 
