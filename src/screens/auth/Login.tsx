@@ -32,7 +32,7 @@ const Login = ({ navigation }: { navigation: any }) => {
                 <TouchableOpacity onPress={() => {
                     navigation.navigate('forgot-password')
                 }}>
-                    <RNPText style={styles.forgotPassword}>
+                    <RNPText style={styles.nav}>
                         Forgot password
                     </RNPText>
 
@@ -42,6 +42,20 @@ const Login = ({ navigation }: { navigation: any }) => {
                 <Button mode='elevated' onPress={() => navigation.navigate('login')} style={styles.submitBtn} labelStyle={styles.submitBtnText} >
                     Login
                 </Button>
+
+                <View style={styles.navContainer}>
+                    <Text style={{ fontFamily: '400' }}>
+                        Don't have an account?
+                    </Text>
+                    <TouchableOpacity onPress={() => {
+                        navigation.navigate('signup')
+                    }}>
+                        <RNPText style={styles.nav}>
+                            Signup
+                        </RNPText>
+
+                    </TouchableOpacity>
+                </View>
 
 
             </View>
