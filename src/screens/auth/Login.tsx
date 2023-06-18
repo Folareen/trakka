@@ -10,42 +10,45 @@ const Login = ({ navigation }: { navigation: any }) => {
 
 
     return (
-        <ScrollView style={styles.container}>
-            <RNPText variant="headlineLarge" style={styles.heading}>Login</RNPText>
-            <TextInput
-                mode="outlined"
-                label="Email"
-                value={emailAddress}
-                onChangeText={text => setEmailAddress(text)}
-                style={styles.input}
-            />
-            <TextInput
-                mode="outlined"
-                label="Password"
-                placeholder=""
-                value={password}
-                onChangeText={text => setPassword(text)}
-                style={styles.input}
-            />
+        <View style={styles.outerContainer}>
+            <View style={styles.container}>
+                <RNPText variant="headlineLarge" style={styles.heading}>Login</RNPText>
+                <TextInput
+                    mode="outlined"
+                    label="Email"
+                    value={emailAddress}
+                    onChangeText={text => setEmailAddress(text)}
+                    style={styles.input}
+                />
+                <TextInput
+                    mode="outlined"
+                    label="Password"
+                    placeholder=""
+                    value={password}
+                    onChangeText={text => setPassword(text)}
+                    style={styles.input}
+                />
 
-            <TouchableOpacity onPress={() => {
-                navigation.navigate('forgot-password')
-            }}>
-                <RNPText style={styles.forgotPassword}>
-                    Forgot password
-                </RNPText>
+                <TouchableOpacity onPress={() => {
+                    navigation.navigate('forgot-password')
+                }}>
+                    <RNPText style={styles.forgotPassword}>
+                        Forgot password
+                    </RNPText>
 
-            </TouchableOpacity>
+                </TouchableOpacity>
 
 
-            <Button mode='elevated' onPress={() => navigation.navigate('login')} style={styles.submitBtn} labelStyle={styles.submitBtnText} >
-                Login
-            </Button>
+                <Button mode='elevated' onPress={() => navigation.navigate('login')} style={styles.submitBtn} labelStyle={styles.submitBtnText} >
+                    Login
+                </Button>
 
+
+            </View>
 
             <StatusBar style='dark' />
 
-        </ScrollView>
+        </View>
 
     )
 }
