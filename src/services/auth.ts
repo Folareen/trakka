@@ -26,3 +26,12 @@ export const signup = async (data:  { fullname : string, username : string, emai
         throw new Error(error?.message || error)
     }
 }
+
+
+export const requestPasswordReset = async (emailAddress : string) => {
+    try {
+        await api.patch('request-password-reset', {emailAddress})
+    } catch (error: any) {
+        throw new Error(error?.message || error)
+    }
+}
