@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
     container:{
         borderRadius: 25,
         flex: 1,
-        padding: 15,
+        padding: 10,
         flexDirection: 'row'
     },
     expenses:{
@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
     icons: {
         backgroundColor: 'white',
         paddingVertical: 8,
-        paddingHorizontal: 15,
+        paddingHorizontal: 10,
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
@@ -26,17 +26,18 @@ export const styles = StyleSheet.create({
         margin: -4
     },
     content: {
-        marginLeft: 10,
+        marginLeft: 8,
         justifyContent: 'center',
+        flex: 1,
     },
     type: {
         color: '#FCFCFC',
-        fontSize: 14,
+        fontSize: 11,
         fontFamily: '500',
         textTransform: 'capitalize'
     }, amount: {
         color: 'white',
-        fontSize: 22,
+        fontSize: 18,
         fontFamily: '600'
     }
 })
