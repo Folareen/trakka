@@ -4,6 +4,7 @@ import { View } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
 import Navigation from './src/navigation';
 import * as SplashScreen from 'expo-splash-screen'
+import { RootSiblingParent } from 'react-native-root-siblings';
 
 SplashScreen.preventAutoHideAsync()
 
@@ -27,10 +28,12 @@ export default function App() {
   if (!isLoaded) return null
 
   return (
-    <View style={{ flex: 1 }} onLayout={handleOnLayout}>
-      <PaperProvider>
-        <Navigation />
-      </PaperProvider>
-    </View>
+    <RootSiblingParent>
+      <View style={{ flex: 1 }} onLayout={handleOnLayout}>
+        <PaperProvider>
+          <Navigation />
+        </PaperProvider>
+      </View>
+    </RootSiblingParent>
   );
 }
