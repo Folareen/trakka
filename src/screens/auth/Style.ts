@@ -70,7 +70,8 @@ const styles = StyleSheet.create({
     overlayInnerErrText:{
         fontFamily: '500',
         color: 'red',
-        fontSize: 16
+        fontSize: 18,
+        textAlign: 'center'
     }
 })
 
