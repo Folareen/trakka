@@ -35,3 +35,12 @@ export const requestPasswordReset = async (emailAddress : string) => {
         throw new Error(error?.message || error)
     }
 }
+
+
+export const resetPassword = async (data : { newPassword : string, passwordResetToken : string, emailAddress : string }) => {
+    try {
+        await api.patch('reset-password', data)
+    } catch (error: any) {
+        throw new Error(error?.message || error)
+    }
+}
