@@ -59,13 +59,13 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(255,255,255,0.8)',
         borderRadius: 5,
         width: 60,
-        paddingVertical: 10,
+        paddingVertical: 15,
         marginRight: 'auto',
         marginLeft: 'auto'
     },
     overlayInnerErr: {
         width: screenWidth / 1.3,
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
     },
     overlayInnerErrText:{
         fontFamily: '500',
