@@ -5,20 +5,26 @@ const api = axios.create({
     timeout: 8000
 })
 
-export const setAxiosToken = (token : string) => {
+api.interceptors.response.use(function (response) {
+    return response;
+}, function (error) {
+    return Promise.reject(error.response.data.message);
+});
 
-  return (api.interceptors.request.use(
-    async (config) => {
-        
-      config.headers = {
-        Authorization: `Bearer ${token}`,
-      };
-      return config;
-    },
-    (error) => {
-      Promise.reject(error);
-    }
-  ))
+export const setAxiosToken = (token: string) => {
+
+    return (api.interceptors.request.use(
+        async (config) => {
+
+            config.headers = {
+                Authorization: `Bearer ${token}`,
+            };
+            return config;
+        },
+        (error) => {
+            Promise.reject(error);
+        }
+    ))
 }
 
 
