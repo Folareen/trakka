@@ -2,6 +2,7 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { Feather, FontAwesome5 } from '@expo/vector-icons'
 import { styles } from './Style'
+import formatAmount from '../../utils/formatAmount'
 
 type Props = {
     amount: number,
@@ -35,7 +36,7 @@ const index = ({ amount, type }: Props) => {
                     {type}
                 </Text>
                 <Text style={styles.amount}>
-                    {amount}
+                    &#8358; {formatAmount(amount)}
                 </Text>
             </View>
         </View>
