@@ -49,14 +49,14 @@ export const styles = StyleSheet.create({
         fontFamily: '600',
         textAlign: 'center'
     },
-    durationsTabContainer: {
+    recentTransTypeContainer: {
         flexDirection: 'row',
         marginVertical: 25,
         marginHorizontal: 7,
         borderColor: 'white',
         borderStyle: 'solid',
         borderWidth: 1,
-        borderRadius: 16
+        borderRadius: 16,
     },
     recentTransHeader:{
         flexDirection: 'row',

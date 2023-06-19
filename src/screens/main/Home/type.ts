@@ -1,1 +1,1 @@
-export type durationType = 'today' | 'week' | 'month' | 'year'
+export type RecentTransType = 'all' | 'income' | 'expenses'
