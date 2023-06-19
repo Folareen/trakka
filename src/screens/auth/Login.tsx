@@ -21,7 +21,6 @@ const Login = ({ navigation }: { navigation: any }) => {
             await login({ emailAddress, password }, store.authenticate)
         } catch (error: any) {
             setError(error.message)
-            console.log(error.message, 'log error')
         } finally {
             setSubmitting(false)
         }
