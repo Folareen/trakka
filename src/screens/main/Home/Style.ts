@@ -45,7 +45,7 @@ export const styles = StyleSheet.create({
         marginVertical: 10
     },
     acctBalAmt: {
-        fontSize: 40,
+        fontSize: 38,
         fontFamily: '600',
         textAlign: 'center'
     },
