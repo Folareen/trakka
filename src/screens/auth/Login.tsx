@@ -48,7 +48,7 @@ const Login = ({ navigation }: { navigation: any }) => {
                 <RNPText variant="headlineLarge" style={styles.heading}>Login</RNPText>
                 <TextInput
                     mode="outlined"
-                    label="Email address"
+                    label="Email address or username"
                     value={emailAddress}
                     onChangeText={text => setEmailAddress(text)}
                     style={styles.input}
