@@ -9,8 +9,8 @@ import { login } from '../../services/auth'
 const Login = ({ navigation }: { navigation: any }) => {
     const [emailAddress, setEmailAddress] = useState<string>('')
     const [password, setPassword] = useState<string>('')
-    const [submitting, setSubmitting] = useState(false)
-    const [error, setError] = useState('')
+    const [submitting, setSubmitting] = useState<boolean>(false)
+    const [error, setError] = useState<string>('')
 
     const store = useAuthStore()
 
