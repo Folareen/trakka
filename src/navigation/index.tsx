@@ -8,6 +8,7 @@ import { ActivityIndicator } from 'react-native'
 import { Modal, Portal } from 'react-native-paper'
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import jwtDecode from "jwt-decode"
+import { setAxiosToken } from '../api'
 
 
 const Navigation = () => {
@@ -22,6 +23,7 @@ const Navigation = () => {
                     setAuthenticating(true)
                     const token = await AsyncStorage.getItem('token') as string
                     const user = await jwtDecode(token)
+                    setAxiosToken(token)
                     store.authenticate(user)
                 } catch (error: any) {
                     console.log(error)
