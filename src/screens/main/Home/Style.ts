@@ -70,6 +70,10 @@ export const styles = StyleSheet.create({
     },
     recentTransactionList: {
         paddingHorizontal: 18
+    },
+    recentTransSkeleton: {
+        rowGap: 15,
+        paddingBottom: 15,
     }
 
 })
