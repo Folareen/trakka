@@ -2,8 +2,10 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { Feather } from '@expo/vector-icons'
 import { styles } from './Style'
+import { getDateAndTime } from '../../utils/formatDate'
+import formatAmount from '../../utils/formatAmount'
 
-const RecentTransactionCard = ({ amount, type, category }: { amount: number, type: string, category: string }) => {
+const RecentTransactionCard = ({ amount, type, category, date }: { amount: number, type: string, category: string, date: string }) => {
     return (
         <View style={styles.container}>
             {
@@ -21,11 +23,16 @@ const RecentTransactionCard = ({ amount, type, category }: { amount: number, typ
 
             <View style={styles.amtAndCgy}>
                 <Text style={styles.amount}>
-                    &#8358; {amount}
+                    &#8358; {formatAmount(amount)}
                 </Text>
-                <Text style={styles.category}>
-                    {category}
-                </Text>
+                <View>
+                    <Text style={styles.category}>
+                        {category}
+                    </Text>
+                    <Text style={[styles.category, { fontSize: 12, marginTop: 5 }]}>
+                        {getDateAndTime(date)}
+                    </Text>
+                </View>
             </View>
         </View>
     )
