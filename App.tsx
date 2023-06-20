@@ -5,6 +5,8 @@ import { PaperProvider } from 'react-native-paper';
 import Navigation from './src/navigation';
 import * as SplashScreen from 'expo-splash-screen'
 import { RootSiblingParent } from 'react-native-root-siblings';
+import 'react-native-reanimated'
+import 'react-native-gesture-handler'
 
 SplashScreen.preventAutoHideAsync()
 
