@@ -1,13 +1,25 @@
-import { Text, View, Image, ImageBackground, FlatList, TouchableOpacity } from 'react-native'
+import { Text, View, Image, ImageBackground, FlatList, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import { styles } from './Style'
 import TotalAmountCard from '../../../components/TotalAmountCard'
 import TabBar from '../../../components/TabBtn'
-import { durationType } from './type'
+import { RecentTransType } from './type'
 import RecentTransactionCard from '../../../components/RecentTransactionCard'
+import { getDateAndTime } from '../../../utils/formatDate'
+import useAuthStore from '../../../stores/useAuthStore'
+import formatAmount from '../../../utils/formatAmount'
+import useFetch from '../../../hooks/useFetch'
+import { Skeleton } from 'moti/skeleton'
+
 
 const Home = ({ navigation }: { navigation: any }) => {
-    const [duration, setDuration] = useState<durationType>('today')
+    const [recentTransType, setRecentTransType] = useState<RecentTransType>('all')
+
+    const store = useAuthStore()
+
+    const recentTransactions = useFetch(`transaction?recent&type=${recentTransType}`, [recentTransType])
+
+    console.log(recentTransactions)
 
     return (
         <View style={styles.container}>
@@ -15,41 +27,47 @@ const Home = ({ navigation }: { navigation: any }) => {
             <ImageBackground style={styles.upper} source={require('../../../assets/images/home-upper-bg.png')} resizeMode='cover' imageStyle={{ borderBottomLeftRadius: 20, borderBottomRightRadius: 20 }}>
                 <View style={styles.header}>
                     <Text style={styles.name}>
-                        MONDAY 9 {'\n'}
-                        NOVEMBER
+                        {getDateAndTime(new Date())}
                     </Text>
-                    <View style={styles.avatarAndName}>
-                        <Image source={require('../../../assets/images/avatar.png')} style={styles.avatar} />
+                    <TouchableOpacity onPress={() => navigation.navigate('profile')} style={styles.avatarAndName}>
+                        <Image source={store.user.avatar ? { uri: store.user.avatar } : require('../../../assets/images/avatar.png')} style={styles.avatar} />
                         <Text style={styles.name}>
-                            VISHNU
+                            {store.user.username}
                         </Text>
-                    </View>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.amounts}>
                     <Text style={styles.acctBalTitle}>
                         Account Balance
                     </Text>
-                    <Text style={styles.acctBalAmt}>
-                        9400.00
-                    </Text>
+                    <Skeleton show={recentTransactions.loading} height={50} colorMode='light'  >
+                        <Text style={styles.acctBalAmt}>
+                            &#8358; {formatAmount(recentTransactions.data?.accountBalance)}
+                        </Text>
+                    </Skeleton  >
+
                 </View>
-                <View style={{ flexDirection: 'row', marginHorizontal: 15, columnGap: 10 }}>
-                    <TotalAmountCard amount={34000} type='income' />
-                    <TotalAmountCard amount={12000} type='expenses' />
-                </View>
+                <Skeleton show={recentTransactions.loading} height={70} colorMode='light' width={'100%'}  >
+                    <View style={{ flexDirection: 'row', marginHorizontal: 8, columnGap: 8 }}>
+                        <TotalAmountCard amount={recentTransactions.data?.incomeAmount} type='income' />
+                        <TotalAmountCard amount={recentTransactions.data?.expensesAmount} type='expenses' />
+
+                    </View>
+                </Skeleton  >
+
             </ImageBackground>
 
-            <View style={styles.durationsTabContainer}>
+            <View style={styles.recentTransTypeContainer}>
                 {
-                    ['today', 'week', 'month', 'year'].map((value) => (
-                        <TabBar value={value as durationType} key={value} setDuration={setDuration} duration={duration} />
+                    ['all', 'income', 'expenses'].map((value) => (
+                        <TabBar value={value as RecentTransType} key={value} setRecentTransType={setRecentTransType} recentTransType={recentTransType} />
                     ))
                 }
             </View>
 
             <View style={styles.recentTransHeader}>
                 <Text style={styles.rtHText}>
-                    Recent Transaction
+                    Recent Transactions
                 </Text>
                 <TouchableOpacity onPress={() => navigation.navigate('transactions')}>
                     <Text style={styles.rtHText}>
@@ -58,24 +76,31 @@ const Home = ({ navigation }: { navigation: any }) => {
                 </TouchableOpacity>
             </View>
 
-            <FlatList
-                style={styles.recentTransactionList}
-                data={[
-                    { amount: 300, type: 'income', category: 'income' },
-                    { amount: 300, type: 'expenses', category: 'food' },
-                    { amount: 300, type: 'income', category: 'income' },
-                    { amount: 300, type: 'income', category: 'income' }
-                ]}
-                renderItem={({ item: { amount, type, category } }) => (
-                    <RecentTransactionCard amount={amount} type={type} category={category} />
-                )}
-                ListEmptyComponent={() => (
-                    <Text>
-                        empty
-                    </Text>
-                )}
 
-            />
+            {
+                recentTransactions.loading ?
+                    <View style={styles.recentTransSkeleton}>
+                        <Skeleton height={60} colorMode='light' width={'100%'} />
+                        <Skeleton height={60} colorMode='light' width={'100%'} />
+                        <Skeleton height={60} colorMode='light' width={'100%'} />
+                        <Skeleton height={60} colorMode='light' width={'100%'} />
+                    </View>
+                    :
+                    <FlatList
+                        style={styles.recentTransactionList}
+                        data={recentTransactions.data?.transactions}
+                        renderItem={({ item: { amount, type, category, date } }) => (
+                            <RecentTransactionCard amount={amount} type={type} category={category} date={date} />
+                        )}
+                        ListEmptyComponent={() => (
+                            <Text style={{ fontFamily: '500', }}>
+                                No transaction found...
+                            </Text>
+                        )}
+                    />
+
+            }
+
 
 
 
