@@ -1,7 +1,6 @@
-import { View, Text, SafeAreaView, Platform, StatusBar } from 'react-native'
+import { SafeAreaView, Platform, StatusBar } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { createStackNavigator } from '@react-navigation/stack'
 import Home from '../screens/main/Home'
 import Transactions from '../screens/main/Transactions'
 import Statistics from '../screens/main/Statistics'
@@ -21,11 +20,11 @@ const MainStack = () => {
       }}>
         <Tab.Screen name='home' component={Home} options={{
           tabBarIcon: ({ color }) => <MaterialIcons name="home-filled" size={30} color={color} />
-          , headerShown: false
+          , headerShown: false, unmountOnBlur: true
         }} />
         <Tab.Screen name='transactions' component={Transactions} options={{
           tabBarIcon: ({ color }) => <MaterialCommunityIcons name="swap-horizontal-bold" size={30} color={color} />
-          , headerShown: false
+          , headerShown: false, unmountOnBlur: true
         }} />
         <Tab.Screen name='add-transaction' component={AddTransaction} options={{
           tabBarIcon: () => <AntDesign name="pluscircle" size={52} color="#7F3DFF" />
@@ -33,7 +32,7 @@ const MainStack = () => {
         }} />
         <Tab.Screen name='statistics' component={Statistics} options={{
           tabBarIcon: ({ color }) => <AntDesign name="piechart" size={30} color={color} />
-          , headerShown: false
+          , headerShown: false, unmountOnBlur: true
         }} />
         <Tab.Screen name='profile' component={Profile} options={{
           tabBarIcon: ({ color }) => <MaterialCommunityIcons name="account" size={30} color={color} />
