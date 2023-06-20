@@ -32,28 +32,32 @@ export const styles = StyleSheet.create({
         backgroundColor: 'transparent',
     },
     monthDropdown: {
-        width: screenWidth / 3
+        width: screenWidth / 2.5
     },
     categoriesDropdown: {
-        width: screenWidth / 4
+        width: screenWidth / 3
     },
     dropdownText: {
-        fontFamily: '600', 
+        fontFamily: '600',
         fontSize: 15,
         textTransform: 'capitalize'
     },
     rowText: {
-        fontFamily: '500', 
+        fontFamily: '500',
         fontSize: 14,
         textTransform: 'capitalize'
     },
     selectedRow: {
-      backgroundColor: 'rgba(0,0,0,0.1)'   
+        backgroundColor: 'rgba(0,0,0,0.1)'
     },
     selectedRowText: {
-        fontFamily: '600' 
+        fontFamily: '600'
     },
     transactions: {
-        
+
+    },
+    transSkeleton: {
+        rowGap: 20,
+        paddingBottom: 20,
     }
 })
