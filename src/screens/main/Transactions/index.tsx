@@ -1,5 +1,5 @@
 import { Text, TouchableOpacity, View, FlatList } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { styles } from './Style'
 import { AntDesign } from '@expo/vector-icons'
 import SelectDropdown from 'react-native-select-dropdown'
@@ -7,39 +7,18 @@ import months from '../../../utils/months'
 import categories from '../../../utils/categories'
 import TransactionCard from '../../../components/TransactionCard'
 import { StatusBar } from 'expo-status-bar'
+import useFetch from '../../../hooks/useFetch'
+import { Skeleton } from 'moti/build/skeleton'
 
-
-const transactions = [
-    {
-        category: 'shopping', description: 'buy some grocery', amount: 4000, transactionType: 'expenses', date: '10:00AM july,2020'
-    },
-    {
-        category: 'salary', description: 'buy some grocery', amount: 4000, transactionType: 'income', date: '10:00AM july,2020'
-    },
-    {
-        category: 'shopping', description: 'buy some grocery', amount: 4000, transactionType: 'expenses', date: '10:00AM july,2020'
-    },
-    {
-        category: 'salary', description: 'buy some grocery', amount: 4000, transactionType: 'income', date: '10:00AM july,2020'
-    },
-    {
-        category: 'shopping', description: 'buy some grocery', amount: 4000, transactionType: 'expenses', date: '10:00AM july,2020'
-    },
-    {
-        category: 'salary', description: 'buy some grocery', amount: 4000, transactionType: 'income', date: '10:00AM july,2020'
-    },
-    {
-        category: 'shopping', description: 'buy some grocery', amount: 4000, transactionType: 'expenses', date: '10:00AM july,2020'
-    },
-    {
-        category: 'salary', description: 'buy some grocery', amount: 4000, transactionType: 'income', date: '10:00AM july,2020'
-    },
-    {
-        category: 'shopping', description: 'buy some grocery', amount: 4000, transactionType: 'expenses', date: '10:00AM july,2020'
-    },
-]
 
 const Transactions = ({ navigation }: { navigation: any }) => {
+    const [transType, setTransType] = useState<'all' | 'expenses' | 'income'>('all')
+    const [month, setMonth] = useState<number>(new Date().getMonth() + 1)
+
+    const [refresh, setRefresh] = useState(false)
+
+    const transactions = useFetch(`transaction?type=${transType}&month=${month}`, [transType, refresh, month])
+
     return (
         <View style={styles.container}>
             <StatusBar style='dark' />
@@ -59,7 +38,7 @@ const Transactions = ({ navigation }: { navigation: any }) => {
                 <SelectDropdown
                     data={months}
                     onSelect={(selectedItem, index) => {
-                        console.log(selectedItem, index)
+                        setMonth(index + 1)
                     }}
                     buttonTextAfterSelection={(selectedItem) => {
                         return selectedItem
@@ -81,7 +60,7 @@ const Transactions = ({ navigation }: { navigation: any }) => {
                 <SelectDropdown
                     data={categories}
                     onSelect={(selectedItem, index) => {
-                        console.log(selectedItem, index)
+                        setTransType(selectedItem)
                     }}
                     buttonTextAfterSelection={(selectedItem) => {
                         return selectedItem
@@ -103,19 +82,35 @@ const Transactions = ({ navigation }: { navigation: any }) => {
                 />
             </View>
 
-            <FlatList
-                style={styles.transactions}
-                data={transactions}
-                renderItem={({ item: { category, description, amount, transactionType, date } }) => (
-                    <TransactionCard amount={amount} transactionType={transactionType} category={category} date={date} description={description} />
-                )}
-                ListEmptyComponent={() => (
-                    <Text>
-                        empty
-                    </Text>
-                )}
+            {
+                transactions.loading ?
+                    <View style={styles.transSkeleton}>
+                        <Skeleton height={80} colorMode='light' width={'100%'} />
+                        <Skeleton height={80} colorMode='light' width={'100%'} />
+                        <Skeleton height={80} colorMode='light' width={'100%'} />
+                        <Skeleton height={80} colorMode='light' width={'100%'} />
+                        <Skeleton height={80} colorMode='light' width={'100%'} />
+                        <Skeleton height={80} colorMode='light' width={'100%'} />
+                        <Skeleton height={80} colorMode='light' width={'100%'} />
+                    </View>
+                    :
+                    <FlatList
+                        style={styles.transactions}
+                        data={transactions.data?.transactions}
+                        renderItem={({ item: { amount, type, category, date, description } }) => (
+                            <TransactionCard amount={amount} type={type} category={category} date={date} description={description} />
+                        )}
+                        ListEmptyComponent={() => (
+                            <View style={{ paddingHorizontal: 20 }}>
+                                <Text style={{ fontFamily: '500', fontSize: 16 }}>
+                                    No transaction found...
+                                </Text>
+                            </View>
+                        )}
+                    />
 
-            />
+            }
+
 
 
         </View>
