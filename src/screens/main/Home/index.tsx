@@ -1,25 +1,37 @@
 import { Text, View, Image, ImageBackground, FlatList, TouchableOpacity, ScrollView } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { styles } from './Style'
 import TotalAmountCard from '../../../components/TotalAmountCard'
 import TabBar from '../../../components/TabBtn'
 import { RecentTransType } from './type'
 import RecentTransactionCard from '../../../components/RecentTransactionCard'
-import { getDateAndTime } from '../../../utils/formatDate'
+import { getDate } from '../../../utils/formatDate'
 import useAuthStore from '../../../stores/useAuthStore'
 import formatAmount from '../../../utils/formatAmount'
 import useFetch from '../../../hooks/useFetch'
 import { Skeleton } from 'moti/skeleton'
 
 
-const Home = ({ navigation }: { navigation: any }) => {
+const Home = ({ navigation }: { navigation: any, route: any }) => {
     const [recentTransType, setRecentTransType] = useState<RecentTransType>('all')
 
     const store = useAuthStore()
 
-    const recentTransactions = useFetch(`transaction?recent&type=${recentTransType}`, [recentTransType])
+    const [refresh, setRefresh] = useState(false)
+    const [loadingAmounts, setLoadingAmounts] = useState(true)
 
-    console.log(recentTransactions)
+
+    const recentTransactions = useFetch(`transaction?recent&type=${recentTransType}`, [recentTransType, refresh])
+
+    const accountBalance = useMemo(() => recentTransactions.data?.accountBalance, [recentTransactions.data?.accountBalance])
+    const incomeAmount = useMemo(() => recentTransactions.data?.incomeAmount, [recentTransactions.data?.incomeAmount])
+    const expensesAmount = useMemo(() => recentTransactions.data?.expensesAmount, [recentTransactions.data?.expensesAmount])
+
+    useEffect(() => {
+        if (recentTransactions.loading == false && (recentTransactions.data != null || recentTransactions.error != '')) {
+            setLoadingAmounts(false)
+        }
+    }, [recentTransactions.loading])
 
     return (
         <View style={styles.container}>
@@ -27,7 +39,7 @@ const Home = ({ navigation }: { navigation: any }) => {
             <ImageBackground style={styles.upper} source={require('../../../assets/images/home-upper-bg.png')} resizeMode='cover' imageStyle={{ borderBottomLeftRadius: 20, borderBottomRightRadius: 20 }}>
                 <View style={styles.header}>
                     <Text style={styles.name}>
-                        {getDateAndTime(new Date())}
+                        {getDate(new Date())}
                     </Text>
                     <TouchableOpacity onPress={() => navigation.navigate('profile')} style={styles.avatarAndName}>
                         <Image source={store.user.avatar ? { uri: store.user.avatar } : require('../../../assets/images/avatar.png')} style={styles.avatar} />
@@ -40,18 +52,17 @@ const Home = ({ navigation }: { navigation: any }) => {
                     <Text style={styles.acctBalTitle}>
                         Account Balance
                     </Text>
-                    <Skeleton show={recentTransactions.loading} height={50} colorMode='light'  >
+                    <Skeleton show={loadingAmounts} height={50} colorMode='light'  >
                         <Text style={styles.acctBalAmt}>
-                            &#8358; {formatAmount(recentTransactions.data?.accountBalance)}
+                            &#8358; {formatAmount(accountBalance)}
                         </Text>
                     </Skeleton  >
 
                 </View>
-                <Skeleton show={recentTransactions.loading} height={70} colorMode='light' width={'100%'}  >
+                <Skeleton show={loadingAmounts} height={70} colorMode='light' width={'100%'}  >
                     <View style={{ flexDirection: 'row', marginHorizontal: 8, columnGap: 8 }}>
-                        <TotalAmountCard amount={recentTransactions.data?.incomeAmount} type='income' />
-                        <TotalAmountCard amount={recentTransactions.data?.expensesAmount} type='expenses' />
-
+                        <TotalAmountCard amount={incomeAmount} type='income' />
+                        <TotalAmountCard amount={expensesAmount} type='expenses' />
                     </View>
                 </Skeleton  >
 
@@ -100,9 +111,6 @@ const Home = ({ navigation }: { navigation: any }) => {
                     />
 
             }
-
-
-
 
 
         </View>
