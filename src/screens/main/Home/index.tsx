@@ -52,19 +52,30 @@ const Home = ({ navigation }: { navigation: any }) => {
                     <Text style={styles.acctBalTitle}>
                         Account Balance
                     </Text>
-                    <Skeleton show={loadingAmounts} height={50} colorMode='light'  >
-                        <Text style={styles.acctBalAmt}>
-                            &#8358; {formatAmount(accountBalance)}
-                        </Text>
-                    </Skeleton  >
+                    {
+                        loadingAmounts ?
+                            <View style={{ paddingHorizontal: 20 }}>
+                                <Skeleton height={60} colorMode='light' width={'100%'} />
+                            </View>
+                            :
+                            <Text style={styles.acctBalAmt}>
+                                &#8358; {formatAmount(accountBalance)}
+                            </Text>
+                    }
 
                 </View>
-                <Skeleton show={loadingAmounts} height={70} colorMode='light' width={'100%'}  >
-                    <View style={{ flexDirection: 'row', marginHorizontal: 8, columnGap: 8 }}>
-                        <TotalAmountCard amount={incomeAmount} type='income' />
-                        <TotalAmountCard amount={expensesAmount} type='expenses' />
-                    </View>
-                </Skeleton  >
+
+                {
+                    loadingAmounts ?
+                        <View style={{ paddingHorizontal: 10 }}>
+                            <Skeleton height={70} colorMode='light' width={'100%'} />
+                        </View>
+                        :
+                        <View style={{ flexDirection: 'row', marginHorizontal: 8, columnGap: 8 }}>
+                            <TotalAmountCard amount={incomeAmount} type='income' />
+                            <TotalAmountCard amount={expensesAmount} type='expenses' />
+                        </View>
+                }
 
             </ImageBackground>
 
@@ -91,10 +102,10 @@ const Home = ({ navigation }: { navigation: any }) => {
             {
                 recentTransactions.loading ?
                     <View style={styles.recentTransSkeleton}>
-                        <Skeleton height={60} colorMode='light' width={'100%'} />
-                        <Skeleton height={60} colorMode='light' width={'100%'} />
-                        <Skeleton height={60} colorMode='light' width={'100%'} />
-                        <Skeleton height={60} colorMode='light' width={'100%'} />
+                        <Skeleton height={65} colorMode='light' width={'100%'} />
+                        <Skeleton height={65} colorMode='light' width={'100%'} />
+                        <Skeleton height={65} colorMode='light' width={'100%'} />
+                        <Skeleton height={65} colorMode='light' width={'100%'} />
                     </View>
                     :
                     <FlatList

@@ -74,6 +74,7 @@ export const styles = StyleSheet.create({
     recentTransSkeleton: {
         rowGap: 15,
         paddingBottom: 15,
+        paddingHorizontal: 20
     }
 
 })
