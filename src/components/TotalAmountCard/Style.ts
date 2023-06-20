@@ -15,8 +15,8 @@ export const styles = StyleSheet.create({
     },
     icons: {
         backgroundColor: 'white',
-        paddingVertical: 8,
-        paddingHorizontal: 10,
+        paddingVertical: 14,
+        paddingHorizontal: 8,
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
