@@ -12,7 +12,7 @@ import useFetch from '../../../hooks/useFetch'
 import { Skeleton } from 'moti/skeleton'
 
 
-const Home = ({ navigation }: { navigation: any, route: any }) => {
+const Home = ({ navigation }: { navigation: any }) => {
     const [recentTransType, setRecentTransType] = useState<RecentTransType>('all')
 
     const store = useAuthStore()
