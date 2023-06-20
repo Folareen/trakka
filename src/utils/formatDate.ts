@@ -22,8 +22,9 @@ export const getDateAndTime = (timestamp: string | Date) => {
 
     const time = new Date(`${timestamp}`).toLocaleTimeString()
 
+
     if (month && day && year && time) {
-        return `${month} ${day}, ${year}. ${time}`;
+        return `${month} ${day}, ${year}. ${time.substring(-2, time.length - 3)}`;
     }
 
     return 'N/A'
