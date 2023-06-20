@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
         borderRadius: 5,
         flexDirection: 'row',
         padding: 10,
-        columnGap: 14
+        columnGap: 10
     },
     expenses: {
         backgroundColor: '#FD3C4A',
@@ -29,16 +29,17 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems:'center',
         justifyContent: 'space-between',
-        flex: 1
-
+        flex: 1,
+        columnGap: 5
     }, amount: {
-        fontSize: 22,
+        fontSize: 20,
         fontWeight: '400'
 
     }, category: {
         color: '#767474',
         fontSize: 15,
         fontFamily: '400',
-        textTransform: 'capitalize'
+        textTransform: 'capitalize',
+        textAlign: 'right'
     }
 })
