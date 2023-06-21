@@ -29,8 +29,12 @@ const MainStack = () => {
         <Tab.Screen name='add-transaction' component={AddTransaction} options={{
           tabBarIcon: () => <AntDesign name="pluscircle" size={52} color="#7F3DFF" />
           , headerShown: false, tabBarLabelStyle: { display: 'none' }, tabBarIconStyle: { marginTop: -60 },
-          unmountOnBlur: true
-        }} />
+          unmountOnBlur: true,
+        }} listeners={({ navigation }) => ({
+          tabPress: () => {
+            navigation.navigate('add-transaction', {})
+          },
+        })} />
         <Tab.Screen name='statistics' component={Statistics} options={{
           tabBarIcon: ({ color }) => <AntDesign name="piechart" size={30} color={color} />
           , headerShown: false, unmountOnBlur: true
