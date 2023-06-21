@@ -32,7 +32,7 @@ export default function App() {
   return (
     <RootSiblingParent>
       <View style={{ flex: 1 }} onLayout={handleOnLayout}>
-        <PaperProvider>
+        <PaperProvider theme={{ mode: 'exact', dark: false }}>
           <Navigation />
         </PaperProvider>
       </View>
