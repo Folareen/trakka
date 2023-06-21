@@ -13,12 +13,11 @@ const Landing = ({ navigation }: { navigation: any }) => {
 
             <View style={styles.content}>
                 <Text style={styles.title}>
-                    Simple solution for
-                    your budget.
+                    Take control of your finances effortlessly
                 </Text>
                 <Text style={styles.description}>
-                    Counter and distribute the income
-                    correctly...
+                    Track and manage your income and expenses
+                    with ease and precision...
                 </Text>
                 <Button mode='elevated' onPress={() => navigation.navigate('login')} style={styles.button} labelStyle={styles.buttonText} >
                     Continue
