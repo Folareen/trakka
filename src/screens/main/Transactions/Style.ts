@@ -19,7 +19,8 @@ export const styles = StyleSheet.create({
     },
     dropdownsContainer: {
         flexDirection: 'row',
-        marginVertical: 25,
+        marginTop: 25,
+        marginBottom: 15,
         marginHorizontal: 15,
         columnGap: 10
     },
@@ -56,8 +57,20 @@ export const styles = StyleSheet.create({
     transactions: {
 
     },
+    swipeTD:{
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        marginBottom: 25,
+        marginTop: 10
+    },
+    swipeText:{
+        fontFamily: '400',
+        fontSize: 10,
+        marginLeft: 8
+    },
     transSkeleton: {
         rowGap: 20,
         paddingBottom: 20,
-    }
+    },
 })
