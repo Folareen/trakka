@@ -8,14 +8,14 @@ import Toast from 'react-native-root-toast'
 import useAuthStore from '../../stores/useAuthStore'
 
 const ProfileButton = ({ title }: { title: string }) => {
-    const {authenticate} = useAuthStore()
+    const { authenticate } = useAuthStore()
     return (
         <TouchableOpacity style={[styles.container, title == 'logout' && styles.logout]} onPress={async () => {
             try {
                 if (title == 'logout') {
                     await AsyncStorage.removeItem('token')
                     setAxiosToken(null)
-                    authenticate({user: null})
+                    authenticate(null)
                     Toast.show('Logged out!', { position: 60, backgroundColor: 'orange', duration: Toast.durations.SHORT, shadow: true, animation: true, hideOnPress: true })
                 } else {
                     Toast.show('Coming soon...', { position: Toast.positions.BOTTOM, backgroundColor: 'orange', duration: Toast.durations.SHORT, shadow: true, animation: true, hideOnPress: true })

@@ -27,7 +27,7 @@ const Navigation = () => {
                     setAxiosToken(token)
                     store.authenticate(user)
                 } catch (error: any) {
-                    Toast.show(error.message, { position: Toast.positions.TOP, backgroundColor: 'orange', duration: Toast.durations.SHORT, shadow: true, animation: true, hideOnPress: true })
+                    // Toast.show(error.message, { position: Toast.positions.TOP, backgroundColor: 'orange', duration: Toast.durations.SHORT, shadow: true, animation: true, hideOnPress: true })
                 } finally {
                     setAuthenticating(false)
                 }
