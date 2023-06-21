@@ -11,7 +11,7 @@ api.interceptors.response.use(function (response) {
     return Promise.reject(error.response.data.message);
 });
 
-export const setAxiosToken = (token: string) => {
+export const setAxiosToken = (token: string | null) => {
 
     return (api.interceptors.request.use(
         async (config) => {
