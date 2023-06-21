@@ -1,7 +1,7 @@
 import { Text, TouchableOpacity, View, FlatList } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { styles } from './Style'
-import { AntDesign } from '@expo/vector-icons'
+import { AntDesign, MaterialIcons } from '@expo/vector-icons'
 import SelectDropdown from 'react-native-select-dropdown'
 import { months } from '../../../utils/formatDate'
 import categories from '../../../utils/categories'
@@ -9,6 +9,7 @@ import TransactionCard from '../../../components/TransactionCard'
 import { StatusBar } from 'expo-status-bar'
 import useFetch from '../../../hooks/useFetch'
 import { Skeleton } from 'moti/build/skeleton'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
 
 const Transactions = ({ navigation }: { navigation: any }) => {
@@ -17,10 +18,12 @@ const Transactions = ({ navigation }: { navigation: any }) => {
 
     const [refresh, setRefresh] = useState(false)
 
+    const [prevCard, setPrevCard] = useState(null)
+
     const transactions = useFetch(`transaction?type=${transType}&month=${months.indexOf(month) + 1}`, [transType, refresh, month])
 
     return (
-        <View style={styles.container}>
+        <GestureHandlerRootView style={styles.container}>
             <StatusBar style='dark' />
 
             <View style={styles.header}>
@@ -83,6 +86,18 @@ const Transactions = ({ navigation }: { navigation: any }) => {
                 />
             </View>
 
+
+            {
+                transactions.data &&
+                <View style={styles.swipeTD}>
+                    <MaterialIcons name="swipe" size={18} color="black" />
+                    <Text style={styles.swipeText}>
+                        Swipe a transaction to edit or delete
+                    </Text>
+                </View>
+            }
+
+
             {
                 transactions.loading ?
                     <View style={styles.transSkeleton}>
@@ -98,8 +113,8 @@ const Transactions = ({ navigation }: { navigation: any }) => {
                     <FlatList
                         style={styles.transactions}
                         data={transactions.data?.transactions}
-                        renderItem={({ item: { amount, type, category, date, description } }) => (
-                            <TransactionCard amount={amount} type={type} category={category} date={date} description={description} />
+                        renderItem={({ item: { amount, type, category, date, description, _id } }) => (
+                            <TransactionCard refresh={refresh} setRefresh={setRefresh} id={_id} navigation={navigation} prevCard={prevCard} setPrevCard={setPrevCard} amount={amount} type={type} category={category} date={date} description={description} />
                         )}
                         ListEmptyComponent={() => (
                             <View style={{ paddingHorizontal: 20 }}>
@@ -114,7 +129,7 @@ const Transactions = ({ navigation }: { navigation: any }) => {
 
 
 
-        </View>
+        </GestureHandlerRootView>
     )
 }
 
