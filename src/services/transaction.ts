@@ -9,9 +9,25 @@ export const getTransactions = async () => {
     }
 }
 
-export const deleteTransaction = async (id:string) => {
+export const deleteTransaction = async (id: string) => {
     try {
         await api.delete(`transaction/${id}`)
+    } catch (error: any) {
+        throw new Error(error?.message || error)
+    }
+}
+
+export const addTransaction = async (data: { amount: number, type: string, category: string, date: string | Date, description: string }) => {
+    try {
+        await api.post('transaction', data)
+    } catch (error: any) {
+        throw new Error(error?.message || error)
+    }
+}
+
+export const editTransaction = async (data: { amount: number, type: string, category: string, date: string | Date, description: string }, id: string) => {
+    try {
+        await api.patch(`transaction/${id}`, data)
     } catch (error: any) {
         throw new Error(error?.message || error)
     }
