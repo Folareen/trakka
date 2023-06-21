@@ -3,6 +3,7 @@ import React from 'react'
 import { styles } from './Style'
 import { AntDesign, Feather } from '@expo/vector-icons'
 import ProfileButton from '../../../components/ProfileButton'
+import { StatusBar } from 'expo-status-bar'
 
 const Profile = ({ navigation }: { navigation: any }) => {
     return (
@@ -36,6 +37,8 @@ const Profile = ({ navigation }: { navigation: any }) => {
                 }
 
             </View>
+
+            <StatusBar style='dark' />
 
         </View>
     )

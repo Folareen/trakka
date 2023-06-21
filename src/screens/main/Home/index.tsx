@@ -10,6 +10,7 @@ import useAuthStore from '../../../stores/useAuthStore'
 import formatAmount from '../../../utils/formatAmount'
 import useFetch from '../../../hooks/useFetch'
 import { Skeleton } from 'moti/skeleton'
+import { StatusBar } from 'expo-status-bar'
 
 
 const Home = ({ navigation }: { navigation: any }) => {
@@ -123,6 +124,7 @@ const Home = ({ navigation }: { navigation: any }) => {
 
             }
 
+            <StatusBar style='dark' />
 
         </View>
     )
