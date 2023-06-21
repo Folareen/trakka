@@ -11,7 +11,6 @@ import { addTransaction, editTransaction } from '../../../services/transaction'
 import Toast from 'react-native-root-toast'
 
 const AddTransaction = ({ navigation, route }: { navigation: any, route: any }) => {
-    console.log(route.params)
     const [amount, setAmount] = useState<string>(route.params?.amount || '')
     const [type, setType] = useState<string>(route.params?.type || '')
     const [category, setCategory] = useState<string>(route.params?.category || '')

@@ -9,6 +9,7 @@ import { Modal, Portal } from 'react-native-paper'
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import jwtDecode from "jwt-decode"
 import { setAxiosToken } from '../api'
+import Toast from 'react-native-root-toast'
 
 
 const Navigation = () => {
@@ -26,7 +27,7 @@ const Navigation = () => {
                     setAxiosToken(token)
                     store.authenticate(user)
                 } catch (error: any) {
-                    console.log(error)
+                    Toast.show(error.message, { position: Toast.positions.TOP, backgroundColor: 'orange', duration: Toast.durations.SHORT, shadow: true, animation: true, hideOnPress: true })
                 } finally {
                     setAuthenticating(false)
                 }
