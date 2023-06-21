@@ -11,8 +11,11 @@ export const styles = StyleSheet.create({
         height:screenHeight / 2
     }, content: {
         marginTop: 'auto',
-        paddingHorizontal: 20,
-        paddingVertical: 30
+        // paddingHorizontal: 20,
+        width: screenWidth / 1.2,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        paddingVertical: 20
     }, 
     title: {
         fontSize: 30,
@@ -20,7 +23,6 @@ export const styles = StyleSheet.create({
     },
     description: {
         fontSize: 16,
-        paddingHorizontal: 20,
         fontFamily: '400',
         marginVertical: 30
     },
