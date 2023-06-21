@@ -32,6 +32,8 @@ export const styles = StyleSheet.create({
         borderRadius: 40,
         backgroundColor: 'transparent',
         width: screenWidth / 1.1,
+        marginLeft: 'auto',
+        marginRight: 'auto',
         marginVertical: 15
     },
     dropdownText: {
